@@ -33,6 +33,11 @@ function funkyDown( options ){
 	var converter = new Showdown.converter();
 	options.output[outputType] = converter.makeHtml(input);
 
+	return{
+		load: function(){
+			options.output[outputType] = converter.makeHtml(typeof options.input === "string" ? options.input : options.input.value || options.input.innerHTML);
+		}
+	} 
 
 }
 

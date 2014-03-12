@@ -32,14 +32,14 @@ describe('FunkyDown', function(){
 				var fakeDomEl = {value:""};
 
 				funkyDown({
-					input: "#hello markdown!",
+					input: "#header",
 					output: fakeDomEl
 				});
 
 				expect(
 					fakeDomEl.value
 				).to.equal(
-					"<h1 id=\"hellomarkdown\">hello markdown!</h1>"
+					"<h1 id=\"header\">header</h1>"
 				);
 			});
 		});
@@ -49,19 +49,42 @@ describe('FunkyDown', function(){
 				var fakeDomEl = {innerHTML:""};
 
 				funkyDown({
-					input: "#hello markdown!",
+					input: "#header",
 					output: fakeDomEl
 				});
 
 				expect(
 					fakeDomEl.value
 				).to.equal(
-					"<h1 id=\"hellomarkdown\">hello markdown!</h1>"
+					"<h1 id=\"header\">header</h1>"
 				);
 			});
 		});
 
 
+	});
+
+	describe('load method', function(){
+		it('should display updated input value', function(){
+
+			var inputDomEl = {value:"1"};
+			var outputDomEl = {value:""};
+
+			var header = funkyDown({
+				input: inputDomEl,
+				output: outputDomEl
+			});
+
+			inputDomEl.value = "2";
+			header.load();
+
+			expect(
+				outputDomEl.value
+			).to.equal(
+				"<p>2</p>"
+			);
+
+		});
 	});
 
 });
