@@ -44,7 +44,10 @@ function funkyDown( options ){
 	}
 
 	// Converts input to HTML and sends to output
-	function createOutput(){
+	function createOutput( options ){
+
+		updateOptions( options );
+
 		// Obtain the correct input and output
 		var outputType = typeof output.value ? 'value' : 'innerHTML';
 
@@ -52,12 +55,27 @@ function funkyDown( options ){
 		output[outputType] = converter.makeHtml( getInput() );
 	}
 
+	// sets the option values
+	function updateOptions( options ){
+		options = options || {};
+
+		if( options.input ){
+			input = options.input;
+		}
+
+		if( options.output ){
+			output = options.output;
+		}
+
+	}
+
 	// Initial output
 	createOutput();
 
 	// return public methods
 	return {
-		load: createOutput
+		load: createOutput,
+		options: updateOptions
 	};
 
 }

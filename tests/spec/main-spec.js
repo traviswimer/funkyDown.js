@@ -70,13 +70,13 @@ describe('FunkyDown', function(){
 			var inputDomEl = {value:"1"};
 			var outputDomEl = {value:""};
 
-			var header = funkyDown({
+			var test = funkyDown({
 				input: inputDomEl,
 				output: outputDomEl
 			});
 
 			inputDomEl.value = "2";
-			header.load();
+			test.load();
 
 			expect(
 				outputDomEl.value
@@ -85,6 +85,77 @@ describe('FunkyDown', function(){
 			);
 
 		});
+
+
+		it('should accept values to update', function(){
+			var inputDomEl = {value:"1"};
+			var inputDomEl2 = {value:"2"};
+			var outputDomEl = {value:"1"};
+			var outputDomEl2 = {value:"2"};
+
+			var test = funkyDown({
+				input: inputDomEl,
+				output: outputDomEl
+			});
+
+			test.load({
+				input: inputDomEl2,
+				output: outputDomEl2
+			});
+
+			expect(
+				outputDomEl.value
+			).to.equal(
+				"<p>1</p>"
+			);
+
+			expect(
+				outputDomEl2.value
+			).to.equal(
+				"<p>2</p>"
+			);
+
+		});
+
+	});
+
+	describe('options method', function(){
+		var inputDomEl = {value:"1"};
+		var inputDomEl2 = {value:"2"};
+		var outputDomEl = {value:"1"};
+		var outputDomEl2 = {value:"2"};
+
+
+		it('should updated input/output values', function(){
+
+			var test = funkyDown({
+				input: inputDomEl,
+				output: outputDomEl
+			});
+
+			test.options({
+				input: inputDomEl2,
+				output: outputDomEl2
+			});
+
+			test.load();
+
+			expect(
+				outputDomEl.value
+			).to.equal(
+				"<p>1</p>"
+			);
+
+			expect(
+				outputDomEl2.value
+			).to.equal(
+				"<p>2</p>"
+			);
+
+		});
+
+
+
 	});
 
 });
