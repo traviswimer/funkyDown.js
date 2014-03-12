@@ -1,0 +1,10 @@
+#node folder
+node_modules
+
+#Grunt
+.grunt
+
+#ignore temporary un-minified build file
+funkyDown.js
+
+howItShouldWork.js
