@@ -2,7 +2,7 @@
 
 ## Javascript Markdown converter/editor optimized for laziness
 
-FunkyDown is a front-end Javascript tool for displaying your Markdown as HTML as easily as possible.
+FunkyDown is a front-end Javascript tool for easily displaying your Markdown as HTML.
 
 Specify an input and an output. That's it.
 
