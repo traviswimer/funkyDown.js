@@ -25,8 +25,7 @@ module.exports = function(grunt){
 				options: {
 					run: true,
 				},
-				src: ['tests/**/*.html'],
-				dest: './tests/output/xunit.out',
+				src: ['tests/**/*.html']
 			},
 		},
 		browserify: {
