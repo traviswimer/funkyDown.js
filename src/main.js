@@ -25,19 +25,40 @@ function funkyDown( options ){
 		throw new Error("You must specify an output DOM element.");
 	}
 
-	// Obtain the correct input and output
-	var input = typeof options.input === "string" ? options.input : options.input.value || options.input.innerHTML;
-	var outputType = typeof options.output.value ? 'value' : 'innerHTML';
+	// Store input/output
+	var input = options.input;
+	var output = options.output;
 
-	// convert the input to Markdown
+	// Create Markdown to HTML converter
 	var converter = new Showdown.converter();
-	options.output[outputType] = converter.makeHtml(input);
 
-	return{
-		load: function(){
-			options.output[outputType] = converter.makeHtml(typeof options.input === "string" ? options.input : options.input.value || options.input.innerHTML);
+	// Retrieve current input value
+	function getInput(){
+		if( typeof input === "string"){
+			return input;
+		}else if( input.value ){
+			return input.value;
+		}else{
+			return input.innerHTML;
 		}
-	} 
+	}
+
+	// Converts input to HTML and sends to output
+	function createOutput(){
+		// Obtain the correct input and output
+		var outputType = typeof output.value ? 'value' : 'innerHTML';
+
+		// Set output
+		output[outputType] = converter.makeHtml( getInput() );
+	}
+
+	// Initial output
+	createOutput();
+
+	// return public methods
+	return {
+		load: createOutput
+	};
 
 }
 
