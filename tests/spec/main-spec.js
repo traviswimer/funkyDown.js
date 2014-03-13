@@ -36,16 +36,16 @@ describe('FunkyDown', function(){
 			});
 
 			it('should accept functions', function(){
-				var fakeDomEl = {value:""};
+				var domEl = document.createElement('div');
 
 				funkyDown({
 					input: function(){
 						return "a";
 					},
-					output: fakeDomEl
+					output: domEl
 				});
 
-				expect(fakeDomEl.value).to.equal("<p>a</p>");
+				expect(domEl.innerHTML).to.equal("<p>a</p>");
 			});
 
 		});
@@ -62,30 +62,30 @@ describe('FunkyDown', function(){
 			});
 
 			it('value should recieve HTML', function(){
-				var fakeDomEl = {value:""};
+				var domEl = document.createElement('textarea');
 
 				funkyDown({
 					input: "#header",
-					output: fakeDomEl
+					output: domEl
 				});
 
 				expect(
-					fakeDomEl.value
+					domEl.value
 				).to.equal(
 					"<h1 id=\"header\">header</h1>"
 				);
 			});
 
 			it('innerHTML should recieve HTML', function(){
-				var fakeDomEl = {innerHTML:""};
+				var domEl = document.createElement('div');
 
 				funkyDown({
 					input: "#header",
-					output: fakeDomEl
+					output: domEl
 				});
 
 				expect(
-					fakeDomEl.value
+					domEl.innerHTML
 				).to.equal(
 					"<h1 id=\"header\">header</h1>"
 				);
@@ -94,17 +94,17 @@ describe('FunkyDown', function(){
 
 
 			it('function should recieve HTML', function(){
-				var fakeDomEl = {innerHTML:""};
+				var domEl = document.createElement('div');
 
 				funkyDown({
 					input: "#header",
 					output: function(html){
-						fakeDomEl.innerHTML = html + " success";
+						domEl.innerHTML = html + " success";
 					}
 				});
 
 				expect(
-					fakeDomEl.innerHTML
+					domEl.innerHTML
 				).to.equal(
 					"<h1 id=\"header\">header</h1> success"
 				);
@@ -120,8 +120,11 @@ describe('FunkyDown', function(){
 	describe('load method', function(){
 		it('should display updated input value', function(){
 
-			var inputDomEl = {value:"1"};
-			var outputDomEl = {value:""};
+			var inputDomEl = document.createElement('input');
+			inputDomEl.type = "text";
+			inputDomEl.value = "1";
+
+			var outputDomEl = document.createElement('div');
 
 			var test = funkyDown({
 				input: inputDomEl,
@@ -132,7 +135,7 @@ describe('FunkyDown', function(){
 			test.load();
 
 			expect(
-				outputDomEl.value
+				outputDomEl.innerHTML
 			).to.equal(
 				"<p>2</p>"
 			);
@@ -141,10 +144,18 @@ describe('FunkyDown', function(){
 
 
 		it('should accept values to update', function(){
-			var inputDomEl = {value:"1"};
-			var inputDomEl2 = {value:"2"};
-			var outputDomEl = {value:"1"};
-			var outputDomEl2 = {value:"2"};
+
+			var inputDomEl = document.createElement('input');
+			inputDomEl.type = "text";
+			inputDomEl.value = "1";
+			var inputDomEl2 = document.createElement('input');
+			inputDomEl2.type = "text";
+			inputDomEl2.value = "2";
+
+			var outputDomEl = document.createElement('div');
+			outputDomEl.innerHTML = "";
+			var outputDomEl2 = document.createElement('div');
+			outputDomEl2.innerHTML = "";
 
 			var test = funkyDown({
 				input: inputDomEl,
@@ -157,13 +168,13 @@ describe('FunkyDown', function(){
 			});
 
 			expect(
-				outputDomEl.value
+				outputDomEl.innerHTML
 			).to.equal(
 				"<p>1</p>"
 			);
 
 			expect(
-				outputDomEl2.value
+				outputDomEl2.innerHTML
 			).to.equal(
 				"<p>2</p>"
 			);
@@ -173,10 +184,17 @@ describe('FunkyDown', function(){
 	});
 
 	describe('options method', function(){
-		var inputDomEl = {value:"1"};
-		var inputDomEl2 = {value:"2"};
-		var outputDomEl = {value:"1"};
-		var outputDomEl2 = {value:"2"};
+		var inputDomEl = document.createElement('input');
+		inputDomEl.type = "text";
+		inputDomEl.value = "1";
+		var inputDomEl2 = document.createElement('input');
+		inputDomEl2.type = "text";
+		inputDomEl2.value = "2";
+
+		var outputDomEl = document.createElement('div');
+		outputDomEl.innerHTML = "";
+		var outputDomEl2 = document.createElement('div');
+		outputDomEl2.innerHTML = "";
 
 
 		it('should updated input/output values', function(){
@@ -194,13 +212,13 @@ describe('FunkyDown', function(){
 			test.load();
 
 			expect(
-				outputDomEl.value
+				outputDomEl.innerHTML
 			).to.equal(
 				"<p>1</p>"
 			);
 
 			expect(
-				outputDomEl2.value
+				outputDomEl2.innerHTML
 			).to.equal(
 				"<p>2</p>"
 			);

@@ -42,10 +42,13 @@ function funkyDown( options ){
 			return input;
 		}else if( typeof input === "function" ){
 			return input();
-		}else if( input.value ){
+		}else if( input.tagName && typeof input.value !== "undefined" && (input.tagName === "INPUT" || input.tagName === "TEXTAREA") ){
 			return input.value;
-		}else{
+		}else if( typeof input.innerHTML !== "undefined" && input.tagName ){
 			return input.innerHTML;
+		}else{
+			// return blank if invalid
+			return "";
 		}
 	}
 
@@ -56,13 +59,14 @@ function funkyDown( options ){
 
 		if( typeof output === "function" ){
 			output( converter.makeHtml( getInput() ) );
-		}else{
-			// Obtain the correct input and output
-			var outputType = typeof output.value ? 'value' : 'innerHTML';
-
+		}else if( output.tagName && typeof output.value !== "undefined" && (output.tagName === "INPUT" || output.tagName === "TEXTAREA") ){
 			// Set output
-			output[outputType] = converter.makeHtml( getInput() );
+			output.value = converter.makeHtml( getInput() );
+		}else if( typeof output.innerHTML !== "undefined" && output.tagName ){
+			// Set output
+			output.innerHTML = converter.makeHtml( getInput() );
 		}
+
 	}
 
 	// sets the option values
