@@ -6,7 +6,7 @@ var browserifyFiles = {};
 browserifyFiles[libraryTempFileName] = ['src/main.js'];
 
 var uglifyFiles = {};
-uglifyFiles[libraryBuildFileName] = [libraryBuildFileName];
+uglifyFiles[libraryBuildFileName] = [libraryTempFileName];
 
 var banner = "/* funkyDown.js v0.0.1 | (c) 2014 Travis Wimer | https://raw.github.com/traviswimer/funkyDown.js/master/LICENSE.txt */\n";
 banner += "/* Showdown Copyright (c) 2007, John Fraser | <http://www.attacklab.net/> | All rights reserved. */\n"
