@@ -1,12 +1,12 @@
 {
   "name": "funkyDown",
   "version": "0.0.1",
-  "description": "Javascript Markdown converter/editor optimized for laziness.",
+  "description": "Javascript Markdown converter optimized for laziness.",
   "main": "FunkyDown.min.js",
   "keywords": [
     "Markdown",
     "Converter",
-    "Editor"
+    "Laziness"
   ],
   "dependencies": {},
   "devDependencies": {
