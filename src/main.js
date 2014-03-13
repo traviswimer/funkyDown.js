@@ -21,9 +21,12 @@ function funkyDown( options ){
 	// "output" property must be a DOM element
 	if(
 		typeof options.output === "undefined" ||
-		!isDomElement( options.output )
+		(
+			typeof options.output !== "function" &&
+			!isDomElement( options.output )
+		)
 	){
-		throw new Error("You must specify an output DOM element.");
+		throw new Error("You must specify an output DOM element or function.");
 	}
 
 	// Store input/output
@@ -51,11 +54,15 @@ function funkyDown( options ){
 
 		updateOptions( options );
 
-		// Obtain the correct input and output
-		var outputType = typeof output.value ? 'value' : 'innerHTML';
+		if( typeof output === "function" ){
+			output( converter.makeHtml( getInput() ) );
+		}else{
+			// Obtain the correct input and output
+			var outputType = typeof output.value ? 'value' : 'innerHTML';
 
-		// Set output
-		output[outputType] = converter.makeHtml( getInput() );
+			// Set output
+			output[outputType] = converter.makeHtml( getInput() );
+		}
 	}
 
 	// sets the option values

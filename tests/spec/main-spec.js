@@ -18,7 +18,7 @@ describe('FunkyDown', function(){
 					funkyDown({
 						input: "a"
 					});
-				}).to.throw("You must specify an output DOM element.");
+				}).to.throw("You must specify an output DOM element or function.");
 			});
 
 			it('should accept DOM-like objects', function(){
@@ -26,13 +26,13 @@ describe('FunkyDown', function(){
 					funkyDown({
 						input: {value: "a"}
 					});
-				}).to.throw("You must specify an output DOM element.");
+				}).to.throw("You must specify an output DOM element or function.");
 
 				expect(function(){
 					funkyDown({
 						input: {innerHTML: "a"}
 					});
-				}).to.throw("You must specify an output DOM element.");
+				}).to.throw("You must specify an output DOM element or function.");
 			});
 
 			it('should accept functions', function(){
@@ -58,7 +58,7 @@ describe('FunkyDown', function(){
 					funkyDown({
 						input: "a"
 					});
-				}).to.throw("You must specify an output DOM element.");
+				}).to.throw("You must specify an output DOM element or function.");
 			});
 
 			it('value should recieve HTML', function(){
@@ -92,6 +92,23 @@ describe('FunkyDown', function(){
 			});
 
 
+
+			it('function should recieve HTML', function(){
+				var fakeDomEl = {innerHTML:""};
+
+				funkyDown({
+					input: "#header",
+					output: function(html){
+						fakeDomEl.innerHTML = html + " success";
+					}
+				});
+
+				expect(
+					fakeDomEl.innerHTML
+				).to.equal(
+					"<h1 id=\"header\">header</h1> success"
+				);
+			});
 
 
 		});
