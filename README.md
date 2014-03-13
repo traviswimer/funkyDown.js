@@ -1,4 +1,4 @@
-# ![FunkyDown](../blob/master/logo.png?raw=true)
+# ![FunkyDown](../master/logo.png?raw=true)
 
 ## Javascript Markdown converter/editor optimized for laziness
 
