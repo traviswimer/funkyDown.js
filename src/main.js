@@ -11,10 +11,11 @@ function funkyDown( options ){
 		typeof options.input === "undefined" ||
 		(
 			typeof options.input !== "string" &&
+			typeof options.input !== "function" &&
 			!isDomElement( options.input )
 		)
 	){
-		throw new Error("You must specify an input string or DOM element.");
+		throw new Error("You must specify an input string, DOM element, or function.");
 	}
 
 	// "output" property must be a DOM element
@@ -34,8 +35,10 @@ function funkyDown( options ){
 
 	// Retrieve current input value
 	function getInput(){
-		if( typeof input === "string"){
+		if( typeof input === "string" ){
 			return input;
+		}else if( typeof input === "function" ){
+			return input();
 		}else if( input.value ){
 			return input.value;
 		}else{

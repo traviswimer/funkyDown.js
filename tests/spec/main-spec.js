@@ -5,30 +5,63 @@ describe('FunkyDown', function(){
 	describe('options variable', function(){
 
 
-		describe('undefined input property', function(){
-			it('should throw error', function(){
+		describe('input property', function(){
+			it('should throw error when undefined', function(){
 				expect(function(){
 					funkyDown({});
-				}).to.throw("You must specify an input string or DOM element.");
+				}).to.throw("You must specify an input string, DOM element, or function.");
 			});
-		});
 
-		describe('undefined output property', function(){
-			it('should throw error', function(){
+
+			it('should accept strings', function(){
 				expect(function(){
 					funkyDown({
 						input: "a"
 					});
 				}).to.throw("You must specify an output DOM element.");
 			});
+
+			it('should accept DOM-like objects', function(){
+				expect(function(){
+					funkyDown({
+						input: {value: "a"}
+					});
+				}).to.throw("You must specify an output DOM element.");
+
+				expect(function(){
+					funkyDown({
+						input: {innerHTML: "a"}
+					});
+				}).to.throw("You must specify an output DOM element.");
+			});
+
+			it('should accept functions', function(){
+				var fakeDomEl = {value:""};
+
+				funkyDown({
+					input: function(){
+						return "a";
+					},
+					output: fakeDomEl
+				});
+
+				expect(fakeDomEl.value).to.equal("<p>a</p>");
+			});
+
 		});
 
-	});
 
-	describe('output', function(){
+		describe('output property', function(){
 
-		describe('value', function(){
-			it('should recieve HTML', function(){
+			it('should throw error when undefined', function(){
+				expect(function(){
+					funkyDown({
+						input: "a"
+					});
+				}).to.throw("You must specify an output DOM element.");
+			});
+
+			it('value should recieve HTML', function(){
 				var fakeDomEl = {value:""};
 
 				funkyDown({
@@ -42,10 +75,8 @@ describe('FunkyDown', function(){
 					"<h1 id=\"header\">header</h1>"
 				);
 			});
-		});
 
-		describe('innerHTML', function(){
-			it('should recieve HTML', function(){
+			it('innerHTML should recieve HTML', function(){
 				var fakeDomEl = {innerHTML:""};
 
 				funkyDown({
@@ -59,10 +90,15 @@ describe('FunkyDown', function(){
 					"<h1 id=\"header\">header</h1>"
 				);
 			});
+
+
+
+
 		});
 
-
 	});
+
+	
 
 	describe('load method', function(){
 		it('should display updated input value', function(){
