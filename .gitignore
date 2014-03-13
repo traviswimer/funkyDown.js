@@ -7,4 +7,5 @@ node_modules
 #ignore temporary un-minified build file
 funkyDown.js
 
-howItShouldWork.js
+#ignore temporary npm folder
+npm

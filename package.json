@@ -1,6 +1,6 @@
 {
-  "name": "funkyDown",
-  "version": "0.0.1",
+  "name": "funkydown",
+  "version": "0.0.2",
   "description": "Javascript Markdown converter optimized for laziness.",
   "main": "FunkyDown.min.js",
   "keywords": [
@@ -16,7 +16,8 @@
     "grunt-mocha": "~0.4.10",
     "chai": "~1.9.0",
     "grunt-umd": "~1.7.3",
-    "grunt-contrib-concat": "~0.3.0"
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-copy": "~0.5.0"
   },
   "contributors": [
     {

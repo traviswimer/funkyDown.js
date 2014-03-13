@@ -60,7 +60,23 @@ module.exports = function(grunt){
 				dest: libraryBuildFileName,
 			},
 		},
-
+		copy: {
+			main: {
+				files: [
+					{
+						expand: true,
+						src: [
+							'funkyDown-*.min.js',
+							'package.json',
+							'README.md',
+							'LICENSE.txt'
+						],
+						dest: 'npm/',
+						filter: 'isFile'
+					},
+				]
+			}
+		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -69,9 +85,13 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-mocha');
 	grunt.loadNpmTasks('grunt-umd');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	grunt.registerTask('default', ['browserify', 'mocha', 'watch']);
 	grunt.registerTask('build', ['browserify', 'mocha', 'umd', 'uglify', 'concat']);
+
+	// adds necessary files to folder for publishing to npm
+	grunt.registerTask('npm', ['copy']);
 
 
 };
