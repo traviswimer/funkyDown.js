@@ -79,7 +79,7 @@ module.exports = function(grunt){
 		},
 		clean: {
 			build: {
-				src: ['funkyDown-*.min.js']
+				src: ['funkydown-*.min.js']
 			},
 			npm: {
 				src: ['./npm']

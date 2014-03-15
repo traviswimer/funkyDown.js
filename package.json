@@ -1,8 +1,7 @@
 {
   "name": "funkydown",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Javascript Markdown converter optimized for laziness.",
-  "main": "FunkyDown.min.js",
   "keywords": [
     "Markdown",
     "Converter",
