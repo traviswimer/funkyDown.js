@@ -66,7 +66,7 @@ module.exports = function(grunt){
 					{
 						expand: true,
 						src: [
-							'funkyDown-*.min.js',
+							libraryBuildFileName,
 							'package.json',
 							'README.md',
 							'LICENSE.txt'
@@ -76,7 +76,15 @@ module.exports = function(grunt){
 					},
 				]
 			}
-		}
+		},
+		clean: {
+			build: {
+				src: ['funkyDown-*.min.js']
+			},
+			npm: {
+				src: ['./npm']
+			}
+		},
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -86,12 +94,13 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-umd');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 
 	grunt.registerTask('default', ['browserify', 'mocha', 'watch']);
-	grunt.registerTask('build', ['browserify', 'mocha', 'umd', 'uglify', 'concat']);
+	grunt.registerTask('build', ['clean:build', 'browserify', 'mocha', 'umd', 'uglify', 'concat']);
 
 	// adds necessary files to folder for publishing to npm
-	grunt.registerTask('npm', ['copy']);
+	grunt.registerTask('npm', ['clean:npm', 'copy']);
 
 
 };

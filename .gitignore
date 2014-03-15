@@ -5,7 +5,7 @@ node_modules
 .grunt
 
 #ignore temporary un-minified build file
-funkyDown.js
+funkydown.js
 
 #ignore temporary npm folder
 npm
