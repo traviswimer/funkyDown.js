@@ -1,6 +1,6 @@
 {
   "name": "funkydown",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Javascript Markdown converter optimized for laziness.",
   "keywords": [
     "Markdown",
@@ -24,5 +24,10 @@
       "name": "Travis Wimer",
       "url": "http://traviswimer.com"
     }
-  ]
+  ],
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/traviswimer/funkyDown.js"
+  },
+  "license": "MIT"
 }
